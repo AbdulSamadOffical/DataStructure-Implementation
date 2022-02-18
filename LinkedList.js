@@ -68,12 +68,56 @@ class SinglyLinkedList {
       console.log(err.message);
     }
   }
+  shift() {
+    let temp = null;
+    try {
+      if (!this.isEmpty()) {
+        temp = this.head;
+        this.head = this.head.next;
+        this.length--;
+        return temp;
+      } else {
+        throw new Error("Can't shift empty array");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  unShift(val) {
+    let temp = null;
+    let newNode = new Node(val);
+    if (this.isEmpty()) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.length++;
+    } else {
+      temp = this.head;
+      this.head = newNode;
+      this.head.next = temp;
+      this.length++;
+    }
+  }
+  get(pos) {
+    let temp = this.head;
+    if (pos > this.length || pos < 1) {
+      return;
+    }
+    if (this.length == 1) {
+      return this.head;
+    } else {
+      for (let i = 0; i < pos - 1; i++) {
+        temp = temp.next;
+      }
+    }
+    return temp;
+  }
 }
 
 let list = new SinglyLinkedList();
 list.push("samad");
-list.push("Navid");
 list.push("rafay");
+list.push("minhaj");
+list.push("wahaj");
 
-console.log(list.pop());
-list.display();
+console.log(list.get(4));

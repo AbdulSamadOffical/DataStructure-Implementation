@@ -100,15 +100,30 @@ class SinglyLinkedList {
   }
   get(pos) {
     let temp = this.head;
-    if (pos > this.length || pos < 1) {
+    if (pos >= this.length || pos < 0) {
       return;
     }
     if (this.length == 1) {
       return this.head;
     } else {
-      for (let i = 0; i < pos - 1; i++) {
+      for (let i = 0; i < pos; i++) {
         temp = temp.next;
       }
+    }
+    return temp;
+  }
+  set(pos, value) {
+    let temp = this.head;
+    if (pos >= this.length || pos < 0) {
+      return;
+    }
+    if (this.length == 1) {
+      temp.val = value;
+    } else {
+      for (let i = 0; i < pos; i++) {
+        temp = temp.next;
+      }
+      temp.val = value;
     }
     return temp;
   }
@@ -120,4 +135,5 @@ list.push("rafay");
 list.push("minhaj");
 list.push("wahaj");
 
-console.log(list.get(4));
+console.log(list.set(2, 50));
+list.display();

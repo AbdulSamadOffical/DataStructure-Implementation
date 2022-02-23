@@ -127,13 +127,77 @@ class SinglyLinkedList {
     }
     return temp;
   }
+  insert(pos, value) {
+    // edge case
+    if (pos < 0 || pos > this.length) {
+      return;
+    }
+    // insert a node at the end
+    if (pos == this.length) {
+      this.push(value);
+      // insert a node at the start
+    } else if (pos == 0) {
+      this.unShift(value);
+    } else {
+      let newNode = new Node(value);
+      let temp = this.head;
+      for (let i = 0; i < pos; i++) {
+        temp = temp.next;
+      }
+      newNode.next = temp.next;
+      temp.next = newNode;
+      this.length++;
+    }
+  }
+  remove(pos) {
+    if (pos < 0 || pos >= this.length) {
+      return;
+    } else if (pos == 0) {
+      this.shift();
+    } else if (pos == this.length - 1) {
+      this.pop();
+    } else {
+      let temp = this.head;
+      for (let i = 1; i < pos; i++) {
+        temp = temp.next;
+      }
+      let removeNode = temp.next;
+      temp.next = removeNode.next;
+      this.length--;
+    }
+  }
+  reverse() {
+    if (this.isEmpty()) {
+      return;
+    } else if (this.length == 1) {
+      return this;
+    } else {
+      let nextNode = this.head.next;
+      this.tail = this.head;
+      this.tail.next = null;
+      let prev = this.tail;
+      let node = nextNode;
+      while (nextNode != null) {
+        if (node.next == null) {
+          this.head = node;
+        }
+        node = node.next;
+        nextNode.next = prev;
+        prev = nextNode;
+        nextNode = node;
+      }
+      return this;
+    }
+  }
 }
 
 let list = new SinglyLinkedList();
-list.push("samad");
-list.push("rafay");
-list.push("minhaj");
-list.push("wahaj");
-
-console.log(list.set(2, 50));
-list.display();
+list.push(13);
+list.push(27);
+list.push(32);
+list.push(71);
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(7);
+console.log(list.reverse());

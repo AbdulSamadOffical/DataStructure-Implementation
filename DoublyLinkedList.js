@@ -119,6 +119,42 @@ class DoublyLinkedList {
       return (temp.next.val = value);
     }
   }
+  insert(pos, value) {
+    if (pos < 0 || pos > this.length) {
+      return undefined;
+    } else if (pos == 0) {
+      return this.unshift(value);
+    } else if (pos == this.length) {
+      return this.push(value).val;
+    } else {
+      let newNode = new Node(value);
+      // taking the previous node
+      let prevNode = this.get(pos - 1);
+      let temp = prevNode.next;
+      prevNode.next = newNode;
+      newNode.prev = prevNode;
+      newNode.next = temp;
+      temp.prev = newNode;
+      this.length++;
+      return newNode;
+    }
+  }
+
+  remove(pos) {
+    if (pos < 0 || pos >= this.length) {
+      return undefined;
+    } else if (pos == 0) {
+      return this.unshift(value);
+    } else if (pos == this.length - 1) {
+      return this.pop();
+    } else {
+      let prevNode = this.get(pos - 1);
+      let temp = prevNode.next.next;
+      prevNode.next = temp;
+      temp.prev = prevNode;
+      this.length--;
+    }
+  }
 }
 
 let node = new DoublyLinkedList();
@@ -127,11 +163,15 @@ node.push("samad");
 node.push("rafay");
 node.push("wahaj");
 node.push("minhaj");
+node.remove(1);
+node.listNode();
+node.reverse();
 // node.unshift("Anaaf");
 // node.unshift("rafay");
 // node.unshift("Abdul Samad");
 // console.log(node.head);
-console.log(node.get(1));
+// node.insert(4, 10);
 // node.listNode();
 // console.log(node.get(3));
 // node.reverse();
+// node.listNode();

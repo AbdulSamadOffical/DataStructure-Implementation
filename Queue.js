@@ -1,26 +1,26 @@
 class Queue {
   constructor() {
     this.list = [];
-    this.front = 0; // the place you are dequeing/add from
-    this.rear = 0; // the place where u enque/remove from
+    this.front = 0; // the place you are dequeing or remove item from 
+    this.rear = 0; // the place where u enque or add into the queue
   }
 
   enqueue(val) {
-    this.list[this.front] = val;
-    this.front++;
+    this.list[this.rear] = val;
+    this.rear++;
   }
   dequeue() {
     let list = [];
-    let removedItem = this.list[this.rear];
-    for (let i = 0; i < this.front - 1; i++) {
-      list[i] = this.list[i + 1];
+    let removedItem = this.list[this.front];
+    this.rear--;
+    for(let i = 0;i<this.rear;i++){
+       list[i] = this.list[i+1]
     }
     this.list = list;
-    this.front--;
-    return removedItem;
   }
+
   display() {
-    for (let i = 0; i < this.front; i++) {
+    for (let i = 0; i < this.rear; i++) {
       console.log(this.list[i]);
     }
   }
